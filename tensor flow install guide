@@ -1,0 +1,41 @@
+tensor flow install guide
+
+unbuntu 16.04
+GPU:GTX660
+
+
+
+3)pip install
+a)sudo apt-get install python-pip python-dev
+b)pip install tensorflow-gpu
+c) vim ~/.bash_profile
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64"
+export CUDA_HOME=/usr/local/cuda
+d)test:
+python
+import tensorflow as tf
+
+4)python -m tensorflow.models.image.mnist.convolutional
+因此，进入convolutional.py所在目录，修改文件权限，然后将WORK_DIRECTORY的data修改为 WORK_DIRECTORY = '/home/gene/.local/lib/python2.7/site-packages/tensorflow/models/image/mnist/data'即可。
+
+
+1)
+E tensorflow/stream_executor/cuda/cuda_dnn.cc:378] Loaded runtime CuDNN library: 5005 (compatibility version 5000) but source was compiled with 5105 (compatibility version 5100). 
+
+S:提示cudnn版本低,
+a/download Download cuDNN v5.1 (August 10, 2016), for CUDA 8.0(cuDNN v5.1 Library for Linux);
+b/
+sudo cp cuda/include/cudnn.h /usr/local/cuda-8.0/include
+sudo cp cuda/lib64/libcudnn* /usr/local/cuda-8.0/lib64
+sudo chmod a+r /usr/local/cuda-8.0/include/cudnn.h /usr/local/cuda-8.0/lib64/libcudnn*
+
+2)python -c 'import os; import inspect; import tensorflow; print(os.path.dirname(inspect.getfile(tensorflow)))'
+
+/home/gene/.local/lib/python2.7/site-packages/tensorflow
+
+a/install path ,use ctrl+H to view the hidden files
+
+link webs:
+http://www.cnblogs.com/yiruparadise/p/5671620.html
+
+http://blog.csdn.net/gavin__zhou/article/details/52693837
